@@ -1,0 +1,101 @@
+:root{--ink:#0c0a1f;--violet:#7c5cff;--coral:#ff6b8a;--gold:#ffd27a;--mint:#5ef2c4;--paper:#f6f1ff;
+  --display:"Aref Ruqaa","Amiri",serif;--body:"Amiri","Aref Ruqaa",serif}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);padding-top:env(safe-area-inset-top);-webkit-tap-highlight-color:transparent}
+#gl,#bg,#fx{position:fixed;inset:0;width:100%;height:100%}
+#fx{pointer-events:none;z-index:5}
+.aurora{position:fixed;inset:-20%;filter:blur(30px);animation:drift 18s ease-in-out infinite alternate;
+  background:radial-gradient(40% 30% at 20% 20%,rgba(124,92,255,.45),transparent),
+  radial-gradient(35% 30% at 85% 75%,rgba(255,107,138,.32),transparent),
+  radial-gradient(30% 25% at 70% 15%,rgba(94,242,196,.18),transparent)}
+@keyframes drift{to{transform:translate(4%,3%) rotate(6deg)}}
+
+main{position:relative;z-index:1;height:calc(100% - 88px)}
+.scene{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;gap:16px;padding:20px;text-align:center;overflow-y:auto}
+.scene>:first-child{margin-top:auto}.scene>:last-child{margin-bottom:auto}
+.scene.active{display:flex}
+@supports not (view-transition-name:x){.scene.active{animation:in .8s cubic-bezier(.2,.8,.2,1)}}
+@keyframes in{from{opacity:0;filter:blur(14px);transform:scale(.97)}}
+h2{font:400 clamp(2rem,9vw,3rem)/1.35 var(--display);padding-block:.12em;
+  background:linear-gradient(90deg,var(--gold),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+#sub,.hint{opacity:.8;max-width:30ch;line-height:1.9;font-size:1.15rem}
+.hint{font-size:.9rem}
+
+.cta{border:0;border-radius:999px;padding:14px 34px;font:700 1.2rem var(--body);color:var(--ink);cursor:pointer;
+  background:linear-gradient(120deg,var(--gold),var(--coral));box-shadow:0 8px 30px rgba(255,107,138,.4);transition:transform .2s}
+.cta:active{transform:scale(.95)}
+.cta.ghost{background:rgba(255,255,255,.08);color:var(--paper);box-shadow:none;border:1px solid rgba(255,255,255,.25)}
+.glass{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:26px}
+
+.hb{font:400 clamp(1.5rem,7vw,2.2rem)/1.2 var(--display);color:var(--gold);text-shadow:0 0 24px rgba(255,210,122,.5)}
+#name{touch-action:none;max-width:100%}
+
+/* memories: 3D tilt carousel */
+.rail{display:flex;gap:16px;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 11vw;perspective:900px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:0 0 min(72vw,290px);height:340px;scroll-snap-align:center;border-radius:26px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;
+  text-align:right;gap:8px;background:linear-gradient(160deg,rgba(124,92,255,.5),rgba(255,107,138,.35)) center/cover;
+  border:1px solid rgba(255,255,255,.2);box-shadow:0 20px 50px rgba(0,0,0,.4);
+  transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .15s}
+.card h3{font:400 1.7rem var(--display);color:var(--gold)}
+.card p{font-size:1.15rem;line-height:1.9}
+
+/* wishes: heart constellation */
+.sky3{position:relative;width:min(84vw,330px);aspect-ratio:1}
+.sky3 svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sky3 polyline{fill:none;stroke:var(--gold);stroke-width:2;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 6px var(--gold))}
+.sky3.done polyline{fill:rgba(255,107,138,.25);stroke:var(--coral);filter:drop-shadow(0 0 12px var(--coral))}
+.hs{position:absolute;transform:translate(-50%,-50%);width:52px;height:52px;border:0;background:none;color:rgba(255,255,255,.55);font-size:2.4rem;cursor:pointer;line-height:1}
+.hs.on{color:var(--gold);text-shadow:0 0 18px var(--gold);animation:pop .5s}
+@keyframes pop{50%{transform:translate(-50%,-50%) scale(1.5)}}
+.wish{min-height:3.4em;max-width:28ch;font-size:1.3rem;line-height:1.9}
+
+/* cake */
+.cake{position:relative;width:190px;height:170px;cursor:pointer;margin:18px 0 6px}
+.layer{position:absolute;left:0;right:0;border-radius:16px}
+.l1{bottom:0;height:60px;background:linear-gradient(var(--coral),#e24a73)}
+.l2{bottom:54px;height:50px;left:24px;right:24px;background:linear-gradient(var(--mint),#33c9a0)}
+.candle{position:absolute;bottom:104px;left:calc(50% - 6px);width:12px;height:42px;background:var(--paper);border-radius:3px}
+.flame{position:absolute;bottom:144px;left:calc(50% - 9px);width:18px;height:26px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%,#fff3b0,#ffa63d);box-shadow:0 0 28px #ffa63d;animation:flick .5s infinite alternate}
+@keyframes flick{to{transform:scale(1.1,.9)}}
+.cake.out .flame{display:none}
+
+/* letter */
+.letterbox{padding:26px 22px;width:min(100%,360px)}
+.letter{font-size:1.3rem;line-height:2.1;min-height:12em;white-space:pre-line}
+.sign{font:400 1.8rem var(--display);color:var(--mint);margin-top:10px}
+
+nav{position:fixed;z-index:2;bottom:0;left:0;right:0;height:88px;display:flex;align-items:center;justify-content:center;gap:20px;padding-bottom:env(safe-area-inset-bottom)}
+nav button{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:var(--paper);font-size:1.7rem;line-height:1;cursor:pointer}
+nav button:disabled{opacity:.25}
+#dots{display:flex;gap:8px}
+#dots b{width:8px;height:8px;border-radius:50%;background:var(--paper);opacity:.3;transition:all .3s}
+#dots b.on{background:var(--gold);opacity:1;width:24px;border-radius:6px}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+body.gl .aurora{display:none}
+main{view-transition-name:scene}
+::view-transition-old(scene){animation:vt-out .45s ease both}
+::view-transition-new(scene){animation:vt-in .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes vt-out{to{opacity:0;filter:blur(16px);transform:scale(1.04)}}
+@keyframes vt-in{from{opacity:0;filter:blur(16px);transform:scale(.96)}}
+::view-transition-group(root){animation-duration:.01s}
+
+@property --a{syntax:"<angle>";initial-value:0deg;inherits:false}
+.card,.letterbox{position:relative}
+.card::before,.letterbox::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from var(--a),transparent 55%,var(--gold),var(--coral),transparent);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spin 6s linear infinite}
+@keyframes spin{to{--a:360deg}}
+
+.w{display:inline-block;opacity:0;animation:wi .9s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes wi{from{opacity:0;filter:blur(8px);transform:translateY(8px)}to{opacity:1;filter:none;transform:none}}
+
+#snd{position:fixed;z-index:3;top:calc(env(safe-area-inset-top) + 10px);left:12px;width:44px;height:44px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font-size:1.2rem;cursor:pointer}
+
+@supports (height:100dvh){html,body{height:100dvh}}
